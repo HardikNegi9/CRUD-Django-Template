@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+Home App
+{% endblock %}
+
+{% block content %}
+    <h1> Are you sure you want to delete this tweet? </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="container mt-4 mb-4">
+            <div class="card" style="width: 18rem;">
+            {% if tweet.photo %}
+              <img src="{{ tweet.photo.url }}" class="card-img-top" alt="...">
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title"> {{ tweet.user.username }} </h5>
+              <p class="card-text"> {{ tweet.content }} </p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-danger">Delete</button>
+        <a href="{% url 'tweet_list' %}" class="btn btn-warning">Cancel</a>
+    </form>
+{% endblock %}
